@@ -8,6 +8,7 @@ import java.util.Collection;
 public class Document {
 
     @Id
+    @GeneratedValue
     private Long id;
 
     private LocalDateTime createdAt, verifiedAt, publishedAt;
