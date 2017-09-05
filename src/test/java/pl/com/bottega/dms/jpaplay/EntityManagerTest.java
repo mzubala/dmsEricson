@@ -115,6 +115,7 @@ public class EntityManagerTest {
         assertThat(employee).isNotNull();
     }
 
+
     @AfterClass
     public static void closeEntityManagerFactory() {
         emf.close();
