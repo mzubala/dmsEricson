@@ -1,5 +1,8 @@
 package pl.com.bottega.dms.model;
 
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
+
 import javax.persistence.*;
 import java.time.LocalDateTime;
 import java.util.Collection;
@@ -54,5 +57,9 @@ public class Document {
 
     public Collection<Employee> getReaders() {
         return readers;
+    }
+
+    public void setAuthor(Employee author) {
+        this.author = author;
     }
 }

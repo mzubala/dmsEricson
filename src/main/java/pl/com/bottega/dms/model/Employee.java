@@ -1,7 +1,10 @@
 package pl.com.bottega.dms.model;
 
+import org.hibernate.annotations.BatchSize;
+
 import javax.persistence.*;
 import java.util.Collection;
+import java.util.LinkedList;
 
 @Entity
 public class Employee {
@@ -14,7 +17,7 @@ public class Employee {
     private User user;
 
     @OneToMany(mappedBy = "author", cascade = CascadeType.ALL, orphanRemoval = false)
-    private Collection<Document> createdDocuments;
+    private Collection<Document> createdDocuments = new LinkedList<>();
 
     @OneToMany(mappedBy = "verifier", cascade = CascadeType.ALL, orphanRemoval = false)
     private Collection<Document> verifiedDocuments;
@@ -41,5 +44,13 @@ public class Employee {
 
     public Long getId() {
         return id;
+    }
+
+    public Collection<Document> getCreatedDocuments() {
+        return createdDocuments;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
     }
 }

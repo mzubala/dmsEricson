@@ -11,7 +11,7 @@ public class User {
 
     private String login, password;
 
-    @OneToOne(mappedBy = "user")
+    @OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
     private Employee employee;
 
     public void setEmployee(Employee employee) {

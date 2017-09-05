@@ -4,14 +4,14 @@ import org.hibernate.LazyInitializationException;
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Test;
+import pl.com.bottega.dms.api.DocumentDto;
 import pl.com.bottega.dms.model.Document;
 import pl.com.bottega.dms.model.Employee;
 import pl.com.bottega.dms.model.User;
 
-import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.Persistence;
-import javax.persistence.TransactionRequiredException;
+import javax.persistence.*;
+
+import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
@@ -113,6 +113,31 @@ public class EntityManagerTest {
         em = emf.createEntityManager();
         Employee employee = em.find(Employee.class, user.getEmployee().getId());
         assertThat(employee).isNotNull();
+    }
+
+    @Test
+    public void getsDtos() {
+        EntityManager em = emf.createEntityManager();
+        em.getTransaction().begin();
+        int n = 100;
+        int k = 3;
+        for (int i = 0; i < n; i++) {
+            User user = new User();
+            Employee employee = new Employee();
+            user.setEmployee(employee);
+            employee.setUser(user);
+            for (int j = 0; j < k; j++) {
+                Document document = new Document();
+                document.setTitle("Dokument " + i * j);
+                employee.getCreatedDocuments().add(document);
+                document.setAuthor(employee);
+            }
+            em.persist(user);
+        }
+        em.getTransaction().commit();
+        Query q = em.createQuery("SELECT new pl.com.bottega.dms.api.DocumentDto(d.number, d.title, d.status) FROM Document d");
+        List<DocumentDto> dtos = q.getResultList();
+        assertThat(dtos.size()).isEqualTo(n*k);
     }
 
 
