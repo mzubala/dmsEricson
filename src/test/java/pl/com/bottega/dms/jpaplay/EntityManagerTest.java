@@ -137,9 +137,56 @@ public class EntityManagerTest {
         em.getTransaction().commit();
         Query q = em.createQuery("SELECT new pl.com.bottega.dms.api.DocumentDto(d.number, d.title, d.status) FROM Document d");
         List<DocumentDto> dtos = q.getResultList();
-        assertThat(dtos.size()).isEqualTo(n*k);
+        assertThat(dtos.size()).isEqualTo(n * k);
     }
 
+    @Test(expected = OptimisticLockException.class)
+    public void optimisticLockingTest() {
+        EntityManager em = emf.createEntityManager();
+        em.getTransaction().begin();
+        User user = new User();
+        Employee employee = new Employee();
+        user.setEmployee(employee);
+        employee.setUser(user);
+        Document document = new Document();
+        document.setTitle("Tytuł początkowy");
+        employee.getCreatedDocuments().add(document);
+        document.setAuthor(employee);
+        em.persist(user);
+        em.getTransaction().commit();
+        em.close();
+
+        em = emf.createEntityManager();
+        em.getTransaction().begin();
+        Document documentRead = em.find(Document.class, document.getId());
+        documentRead.setTitle("Zmieniony tytuł");
+        em.getTransaction().commit();
+        em.close();
+
+        em = emf.createEntityManager();
+        em.getTransaction().begin();
+        document.setTitle("Konkurencyjna zmiana");
+        em.merge(document);
+        em.getTransaction().commit();
+        em.close();
+    }
+
+    @Test
+    public void testLocking() {
+        EntityManager em = emf.createEntityManager();
+        em.getTransaction().begin();
+        User user = new User();
+        Employee employee = new Employee();
+        user.setEmployee(employee);
+        employee.setUser(user);
+        em.persist(user);
+        em.getTransaction().commit();
+        em.close();
+
+        em = emf.createEntityManager();
+        em.getTransaction().begin();
+        em.find(User.class, user.getId(), LockModeType.PESSIMISTIC_WRITE);
+    }
 
     @AfterClass
     public static void closeEntityManagerFactory() {

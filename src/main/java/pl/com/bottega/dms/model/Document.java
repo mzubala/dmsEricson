@@ -43,6 +43,9 @@ public class Document {
     @Enumerated(EnumType.STRING)
     private DocumentStatus status;
 
+    @Version
+    private int version;
+
     public Long getId() {
         return id;
     }

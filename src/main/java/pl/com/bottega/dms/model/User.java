@@ -21,4 +21,8 @@ public class User {
     public Employee getEmployee() {
         return employee;
     }
+
+    public Long getId() {
+        return id;
+    }
 }
