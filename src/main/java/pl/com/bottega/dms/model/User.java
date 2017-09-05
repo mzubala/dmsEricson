@@ -11,7 +11,14 @@ public class User {
 
     private String login, password;
 
-    @OneToOne(mappedBy = "user", cascade = {CascadeType.MERGE, CascadeType.PERSIST})
+    @OneToOne(mappedBy = "user")
     private Employee employee;
 
+    public void setEmployee(Employee employee) {
+        this.employee = employee;
+    }
+
+    public Employee getEmployee() {
+        return employee;
+    }
 }

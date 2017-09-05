@@ -38,4 +38,8 @@ public class Employee {
             @AttributeOverride(name = "number", column = @Column(name = "private_phone_number"))
     })
     private PhoneNumber privatePhone;
+
+    public Long getId() {
+        return id;
+    }
 }

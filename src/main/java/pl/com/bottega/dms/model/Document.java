@@ -40,4 +40,19 @@ public class Document {
     @Enumerated(EnumType.STRING)
     private DocumentStatus status;
 
+    public Long getId() {
+        return id;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public Collection<Employee> getReaders() {
+        return readers;
+    }
 }
