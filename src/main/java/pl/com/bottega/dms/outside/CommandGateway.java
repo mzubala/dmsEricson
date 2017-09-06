@@ -9,6 +9,7 @@ import pl.com.bottega.dms.inside.model.DocumentRepository;
 import pl.com.bottega.dms.inside.model.commands.Command;
 import pl.com.bottega.dms.inside.model.commands.CreateDocumentCommand;
 import pl.com.bottega.dms.inside.model.commands.VerifyDocumentCommand;
+import pl.com.bottega.dms.outside.decorators.LoggingHandler;
 import pl.com.bottega.dms.outside.decorators.TransactionalHandler;
 import pl.com.bottega.dms.outside.decorators.ValidatingHandler;
 import pl.com.bottega.dms.outside.read.JPADocumentReader;
@@ -69,6 +70,7 @@ public class CommandGateway {
     private <Result> Handler<Command, Result> decorateHandler(Handler<Command, Result> handler, EntityManager entityManager) {
         handler = new TransactionalHandler<>(handler, entityManager);
         handler = new ValidatingHandler<>(handler);
+        handler = new LoggingHandler<>(handler);
         return handler;
     }
 

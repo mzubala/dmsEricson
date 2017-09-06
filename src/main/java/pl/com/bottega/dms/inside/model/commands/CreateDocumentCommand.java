@@ -29,4 +29,12 @@ public class CreateDocumentCommand implements Command {
         if(employeeId == null)
             errors.add("employeeId", "is required");
     }
+
+    @Override
+    public String toString() {
+        return "CreateDocumentCommand{" +
+                "title='" + title + '\'' +
+                ", employeeId=" + employeeId +
+                '}';
+    }
 }

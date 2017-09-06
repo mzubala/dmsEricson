@@ -29,4 +29,12 @@ public class VerifyDocumentCommand implements Command {
     public void setDocumentNumber(String documentNumber) {
         this.documentNumber = documentNumber;
     }
+
+    @Override
+    public String toString() {
+        return "VerifyDocumentCommand{" +
+                "employeeId=" + employeeId +
+                ", documentNumber='" + documentNumber + '\'' +
+                '}';
+    }
 }
