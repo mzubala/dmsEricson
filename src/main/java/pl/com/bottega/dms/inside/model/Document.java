@@ -45,7 +45,7 @@ public class Document {
     @Version
     private int version;
 
-    Document() {}
+    public Document() {}
 
     public Document(CreateDocumentCommand createDocumentCommand) {
 

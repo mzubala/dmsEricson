@@ -39,7 +39,7 @@ public class CommandGateway {
 
     private <Result> Handler<Command, Result> createHandler(Command command) {
         Handler<Command, Result> handler;
-        Class<? extends Handler> handlerClass = handlersMap.get(command);
+        Class<? extends Handler> handlerClass = handlersMap.get(command.getClass());
         if (handlerClass == null) {
             throw new RuntimeException(String.format("No handler for %s registered", command.getClass()));
         }
@@ -55,7 +55,6 @@ public class CommandGateway {
         if (handler instanceof DocumentRepositoryAware)
             ((DocumentRepositoryAware) handler).setDocumentRepository(createDocumentRepository(entityManager));
 
-
     }
 
     private DocumentRepository createDocumentRepository(EntityManager entityManager) {
@@ -70,5 +69,9 @@ public class CommandGateway {
 
     public static CommandGateway getInstance() {
         return INSTANCE;
+    }
+
+    public void close() {
+        entityManagerFactory.close();
     }
 }

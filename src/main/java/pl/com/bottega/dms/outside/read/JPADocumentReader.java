@@ -1,6 +1,6 @@
 package pl.com.bottega.dms.outside.read;
 
-import com.sun.deploy.util.StringUtils;
+import org.apache.commons.lang.StringUtils;
 import pl.com.bottega.dms.inside.api.DocumentDto;
 import pl.com.bottega.dms.inside.api.DocumentReader;
 import pl.com.bottega.dms.inside.api.DocumentSearchCriteria;

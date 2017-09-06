@@ -15,6 +15,17 @@ public class JPADocumentRepository implements DocumentRepository {
 
     @Override
     public void save(Document document) {
-
+        entityManager.persist(document);
     }
+
+    @Override
+    public Document load(String number) {
+        Document document = (Document) entityManager.
+                createQuery("FROM Document d WHERE d.number = :number").
+                setParameter("number", number).
+                getSingleResult();
+        return document;
+    }
+
+
 }

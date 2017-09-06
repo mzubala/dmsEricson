@@ -12,7 +12,7 @@ public class ValidationErrors {
     }
 
     public boolean anyErrors() {
-        return errors.isEmpty();
+        return !errors.isEmpty();
     }
 
     public Map<String, String> getErrors() {

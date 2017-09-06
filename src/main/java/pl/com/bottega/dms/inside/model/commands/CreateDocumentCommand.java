@@ -3,6 +3,7 @@ package pl.com.bottega.dms.inside.model.commands;
 public class CreateDocumentCommand implements Command {
 
     private String title;
+
     private Long employeeId;
 
     public void setTitle(String title) {
@@ -11,6 +12,14 @@ public class CreateDocumentCommand implements Command {
 
     public String getTitle() {
         return title;
+    }
+
+    public Long getEmployeeId() {
+        return employeeId;
+    }
+
+    public void setEmployeeId(Long employeeId) {
+        this.employeeId = employeeId;
     }
 
     @Override
