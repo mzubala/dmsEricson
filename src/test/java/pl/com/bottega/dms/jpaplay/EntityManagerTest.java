@@ -18,7 +18,7 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 
 public class EntityManagerTest {
-
+/*
     private static EntityManagerFactory emf;
 
     @BeforeClass
@@ -192,5 +192,5 @@ public class EntityManagerTest {
     public static void closeEntityManagerFactory() {
         emf.close();
     }
-
+*/
 }

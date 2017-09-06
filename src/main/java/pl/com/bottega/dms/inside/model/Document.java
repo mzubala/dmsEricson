@@ -1,10 +1,13 @@
 package pl.com.bottega.dms.inside.model;
 
 import pl.com.bottega.dms.inside.model.commands.CreateDocumentCommand;
+import pl.com.bottega.dms.inside.model.commands.VerifyDocumentCommand;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
-import java.util.Collection;
+import java.util.UUID;
+
+import static com.google.common.base.Preconditions.checkState;
 
 @Entity
 public class Document {
@@ -13,62 +16,36 @@ public class Document {
     @GeneratedValue
     private Long id;
 
-    private LocalDateTime createdAt, verifiedAt, publishedAt;
-
+    private String number;
     private String title;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    private Employee author;
+    private LocalDateTime createdAt, verifiedAt, publishedAt;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    private Employee verifier;
-
-    @ManyToOne(fetch = FetchType.LAZY)
-    private Employee publisher;
-
-    @ManyToMany
-    @JoinTable(
-            joinColumns = @JoinColumn(name = "document_id"),
-            inverseJoinColumns = @JoinColumn(name="employee_id"))
-    private Collection<Employee> readers;
+    private Long creatorId, verifierId, publisherId;
 
     @Lob
     @Column(length = Short.MAX_VALUE)
     @Basic(fetch = FetchType.LAZY)
     private String content;
 
-    private String number;
-
     @Enumerated(EnumType.STRING)
     private DocumentStatus status;
-
-    @Version
-    private int version;
 
     public Document() {}
 
     public Document(CreateDocumentCommand createDocumentCommand) {
-
+        title = createDocumentCommand.getTitle();
+        createdAt = LocalDateTime.now();
+        status = DocumentStatus.DRAFT;
+        number = UUID.randomUUID().toString();
+        creatorId = createDocumentCommand.getEmployeeId();
     }
 
-    public Long getId() {
-        return id;
-    }
-
-    public void setTitle(String title) {
-        this.title = title;
-    }
-
-    public String getTitle() {
-        return title;
-    }
-
-    public Collection<Employee> getReaders() {
-        return readers;
-    }
-
-    public void setAuthor(Employee author) {
-        this.author = author;
+    public void verify(VerifyDocumentCommand command) {
+        checkState(status == DocumentStatus.DRAFT);
+        status = DocumentStatus.VERIFIED;
+        verifierId = command.getEmployeeId();
+        verifiedAt = LocalDateTime.now();
     }
 
     public String getNumber() {

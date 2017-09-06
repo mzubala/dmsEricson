@@ -11,18 +11,4 @@ public class User {
 
     private String login, password;
 
-    @OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
-    private Employee employee;
-
-    public void setEmployee(Employee employee) {
-        this.employee = employee;
-    }
-
-    public Employee getEmployee() {
-        return employee;
-    }
-
-    public Long getId() {
-        return id;
-    }
 }

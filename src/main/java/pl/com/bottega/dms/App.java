@@ -1,6 +1,7 @@
 package pl.com.bottega.dms;
 
 import pl.com.bottega.dms.inside.model.commands.CreateDocumentCommand;
+import pl.com.bottega.dms.inside.model.commands.VerifyDocumentCommand;
 import pl.com.bottega.dms.outside.CommandGateway;
 
 import javax.persistence.EntityManager;
@@ -12,7 +13,12 @@ public class App {
         CreateDocumentCommand cmd = new CreateDocumentCommand();
         cmd.setTitle("Pierwszy dokument");
         cmd.setEmployeeId(666L);
-        CommandGateway.getInstance().execute(cmd);
+        String number = CommandGateway.getInstance().execute(cmd);
+        System.out.println("Numer doca: " + number);
+        VerifyDocumentCommand verifyCmd = new VerifyDocumentCommand();
+        verifyCmd.setDocumentNumber(number);
+        verifyCmd.setEmployeeId(777L);
+        CommandGateway.getInstance().execute(verifyCmd);
         CommandGateway.getInstance().close();
     }
 }
