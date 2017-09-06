@@ -19,6 +19,9 @@ public class App {
         verifyCmd.setDocumentNumber(number);
         verifyCmd.setEmployeeId(777L);
         CommandGateway.getInstance().execute(verifyCmd);
+
+        CommandGateway.getInstance().createDocumentReader();
+
         CommandGateway.getInstance().close();
     }
 }

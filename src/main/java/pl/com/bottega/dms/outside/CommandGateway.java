@@ -4,12 +4,14 @@ import pl.com.bottega.dms.inside.api.handlers.CreateDocumentHandler;
 import pl.com.bottega.dms.inside.api.handlers.Handler;
 import pl.com.bottega.dms.inside.api.handlers.VerifyDocumentHandler;
 import pl.com.bottega.dms.inside.api.handlers.di.DocumentRepositoryAware;
+import pl.com.bottega.dms.inside.api.read.DocumentReader;
 import pl.com.bottega.dms.inside.model.DocumentRepository;
 import pl.com.bottega.dms.inside.model.commands.Command;
 import pl.com.bottega.dms.inside.model.commands.CreateDocumentCommand;
 import pl.com.bottega.dms.inside.model.commands.VerifyDocumentCommand;
 import pl.com.bottega.dms.outside.decorators.TransactionalHandler;
 import pl.com.bottega.dms.outside.decorators.ValidatingHandler;
+import pl.com.bottega.dms.outside.read.JPADocumentReader;
 import pl.com.bottega.dms.outside.repositories.JPADocumentRepository;
 
 import javax.persistence.EntityManager;
@@ -72,6 +74,10 @@ public class CommandGateway {
 
     public static CommandGateway getInstance() {
         return INSTANCE;
+    }
+
+    public DocumentReader createDocumentReader() {
+        return new JPADocumentReader(entityManagerFactory.createEntityManager());
     }
 
     public void close() {

@@ -1,4 +1,4 @@
-package pl.com.bottega.dms.inside.api;
+package pl.com.bottega.dms.inside.api.read;
 
 import pl.com.bottega.dms.inside.model.DocumentStatus;
 

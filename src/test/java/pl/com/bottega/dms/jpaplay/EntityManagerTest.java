@@ -1,20 +1,6 @@
 package pl.com.bottega.dms.jpaplay;
 
-import org.hibernate.LazyInitializationException;
-import org.junit.AfterClass;
-import org.junit.BeforeClass;
-import org.junit.Test;
-import pl.com.bottega.dms.inside.api.DocumentDto;
-import pl.com.bottega.dms.inside.model.Document;
-import pl.com.bottega.dms.inside.model.Employee;
-import pl.com.bottega.dms.inside.model.User;
-
-import javax.persistence.*;
-
-import java.util.List;
-
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 
 public class EntityManagerTest {
@@ -135,7 +121,7 @@ public class EntityManagerTest {
             em.persist(user);
         }
         em.getTransaction().commit();
-        Query q = em.createQuery("SELECT new pl.com.bottega.dms.inside.api.DocumentDto(d.number, d.title, d.status) FROM Document d");
+        Query q = em.createQuery("SELECT new pl.com.bottega.dms.inside.api.read.DocumentDto(d.number, d.title, d.status) FROM Document d");
         List<DocumentDto> dtos = q.getResultList();
         assertThat(dtos.size()).isEqualTo(n * k);
     }
