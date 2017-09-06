@@ -1,15 +1,13 @@
 package pl.com.bottega.dms.jpaplay;
 
-import org.hibernate.LazyInitializationException;
-import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.stat.Statistics;
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Test;
-import pl.com.bottega.dms.model.Document;
-import pl.com.bottega.dms.model.Employee;
-import pl.com.bottega.dms.model.User;
+import pl.com.bottega.dms.inside.model.Document;
+import pl.com.bottega.dms.inside.model.Employee;
+import pl.com.bottega.dms.inside.model.User;
 
 import javax.persistence.*;
 

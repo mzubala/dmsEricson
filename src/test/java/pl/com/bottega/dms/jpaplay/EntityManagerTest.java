@@ -4,10 +4,10 @@ import org.hibernate.LazyInitializationException;
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Test;
-import pl.com.bottega.dms.api.DocumentDto;
-import pl.com.bottega.dms.model.Document;
-import pl.com.bottega.dms.model.Employee;
-import pl.com.bottega.dms.model.User;
+import pl.com.bottega.dms.inside.api.DocumentDto;
+import pl.com.bottega.dms.inside.model.Document;
+import pl.com.bottega.dms.inside.model.Employee;
+import pl.com.bottega.dms.inside.model.User;
 
 import javax.persistence.*;
 
@@ -135,7 +135,7 @@ public class EntityManagerTest {
             em.persist(user);
         }
         em.getTransaction().commit();
-        Query q = em.createQuery("SELECT new pl.com.bottega.dms.api.DocumentDto(d.number, d.title, d.status) FROM Document d");
+        Query q = em.createQuery("SELECT new pl.com.bottega.dms.inside.api.DocumentDto(d.number, d.title, d.status) FROM Document d");
         List<DocumentDto> dtos = q.getResultList();
         assertThat(dtos.size()).isEqualTo(n * k);
     }

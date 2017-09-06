@@ -1,7 +1,6 @@
-package pl.com.bottega.dms.model;
+package pl.com.bottega.dms.inside.model;
 
-import org.hibernate.annotations.Fetch;
-import org.hibernate.annotations.FetchMode;
+import pl.com.bottega.dms.inside.model.commands.CreateDocumentCommand;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
@@ -46,6 +45,12 @@ public class Document {
     @Version
     private int version;
 
+    Document() {}
+
+    public Document(CreateDocumentCommand createDocumentCommand) {
+
+    }
+
     public Long getId() {
         return id;
     }
@@ -64,5 +69,9 @@ public class Document {
 
     public void setAuthor(Employee author) {
         this.author = author;
+    }
+
+    public String getNumber() {
+        return number;
     }
 }

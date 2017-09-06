@@ -1,6 +1,6 @@
-package pl.com.bottega.dms.api;
+package pl.com.bottega.dms.inside.api;
 
-import pl.com.bottega.dms.model.DocumentStatus;
+import pl.com.bottega.dms.inside.model.DocumentStatus;
 
 public class DocumentSearchCriteria {
 

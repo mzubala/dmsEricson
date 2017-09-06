@@ -1,6 +1,6 @@
-package pl.com.bottega.dms.infrastructure;
+package pl.com.bottega.dms.outside.repositories;
 
-import pl.com.bottega.dms.model.DocumentRepository;
+import pl.com.bottega.dms.inside.model.DocumentRepository;
 
 import javax.persistence.EntityManager;
 

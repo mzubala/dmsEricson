@@ -1,10 +1,10 @@
-package pl.com.bottega.dms.infrastructure;
+package pl.com.bottega.dms.outside.read;
 
 import com.sun.deploy.util.StringUtils;
-import pl.com.bottega.dms.api.DocumentDto;
-import pl.com.bottega.dms.api.DocumentReader;
-import pl.com.bottega.dms.api.DocumentSearchCriteria;
-import pl.com.bottega.dms.model.Document;
+import pl.com.bottega.dms.inside.api.DocumentDto;
+import pl.com.bottega.dms.inside.api.DocumentReader;
+import pl.com.bottega.dms.inside.api.DocumentSearchCriteria;
+import pl.com.bottega.dms.inside.model.Document;
 
 import javax.persistence.EntityManager;
 import javax.persistence.Query;

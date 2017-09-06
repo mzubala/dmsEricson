@@ -1,6 +1,4 @@
-package pl.com.bottega.dms.model;
-
-import org.hibernate.annotations.BatchSize;
+package pl.com.bottega.dms.inside.model;
 
 import javax.persistence.*;
 import java.util.Collection;
